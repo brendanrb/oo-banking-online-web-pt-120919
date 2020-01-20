@@ -1,6 +1,7 @@
 class BankAccount
+  # code here
+  attr_accessor :balance, :status
   attr_reader :name
-  attr_accessor :balance, :status, :account_hash
 
   def initialize(name)
     @name = name
@@ -8,30 +9,24 @@ class BankAccount
     @status = "open"
   end
 
-  def deposit(deposit_amount)
-    @balance += deposit_amount
+  def deposit(amount)
+    @balance += amount
   end
 
   def display_balance
-    p "Your balance is $#{self.balance}."
-  end
-
-  def status=(status)
-    @status
-  end
-
-  def balance=(balance)
-    @balance
+    "Your Balance is $#{@balance}."
   end
 
   def valid?
-    (status == 'open') && (balance > 0)
+    if @status == "open" && @balance > 0
+      true
+    else
+      false
+    end
   end
 
-def account_hash
-    instance_variables.map do |var|
-        [var[1..-1].to_sym, instance_variable_get(var)]
-    end.to_h
+  def close_account
+    @status = "closed"
   end
 
 end
